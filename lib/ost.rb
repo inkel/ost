@@ -75,4 +75,9 @@ module Ost
   def self.options
     @options || {}
   end
+
+  def reconnect!(options = {})
+    connect(options)
+    @queues = nil
+  end
 end
