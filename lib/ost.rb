@@ -52,16 +52,18 @@ module Ost
     end
   end
 
-  @queues = Hash.new do |hash, key|
-    hash[key] = Queue.new(key)
+  def self.queues
+    @queues ||= Hash.new do |hash, key|
+      hash[key] = Queue.new(key)
+    end
   end
 
   def self.[](queue)
-    @queues[queue]
+    queues[queue]
   end
 
   def self.stop
-    @queues.each { |_, queue| queue.stop }
+    queues.each { |_, queue| queue.stop }
   end
 
   @options = nil
